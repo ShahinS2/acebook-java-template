@@ -9,7 +9,10 @@ import com.makersacademy.acebook.repository.FriendRepository;
 import com.makersacademy.acebook.repository.UserRepository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,36 +37,38 @@ public class FriendController {
   @Autowired
   UserRepository userRepository;
   
-  @GetMapping("addFriend")
+  @GetMapping("/addFriend")
   public ResponseEntity<?> addUser(@RequestParam("friendId")String friendId) throws NullPointerException{
   
     Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
-    String currentUser = loggedIn.getName();
-      User user = userRepository.findById(id).orElseThrow();
-      Friends second_friend = new Friends().getSecondUser();
-      return ResponseEntity.ok("Friend added successfully");
+    String currentUserID = loggedIn.getName();
+    User user = userRepository.findByUsername(currentUserID);
+    User user2 = userRepository.findByUsername(friendId);
+    saveFriend(user, user2);
+    return ResponseEntity.ok("Friend added successfully");
   }
 
 
-  @GetMapping("listFriends")
-  public ResponseEntity<List<User>> getFriends() {
-      List<User> myFriends = friendService.getFriends();
-      return new ResponseEntity<List<User>>(myFriends, HttpStatus.OK);
+  @GetMapping("/listFriends")
+  public ResponseEntity<List<Friends>> getFriends() {
+      Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
+      String currentUserID = loggedIn.getName();
+      User user = userRepository.findByUsername(currentUserID);
+      List<Friends> myFriends = friendRepository.findByFirstUser(user);
+      return new ResponseEntity<List<Friends>>(myFriends, HttpStatus.OK);
   }
 
-  public void saveFriend(String name, Long id) throws NullPointerException{
+  public void saveFriend(User name, User friend2) throws NullPointerException{
 
     Friends friend = new Friends();
-    User user1 = userRepository.findByUsername(name);
-    User user2 = userRepository.findById(id).orElseThrow();
-    User firstuser = user1;
-    User seconduser = user2;
-    if(user1.getID() > user2.getID()){
-         firstuser = user2;
-         seconduser = user1;
+    User firstuser = name;
+    User seconduser = friend2;
+    if(name.getID() > friend2.getID()){
+         firstuser = friend2;
+         seconduser = name;
     }
     if( !(friendRepository.existsByFirstUserAndSecondUser(firstuser,seconduser)) ){
-        friend.setCreatedDate(new Date(id));
+        friend.setCreatedDate(LocalDate.now());
         friend.setFirstUser(firstuser);
         friend.setSecondUser(seconduser);
         friendRepository.save(friend);

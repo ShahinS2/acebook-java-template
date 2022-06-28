@@ -1,6 +1,7 @@
 package com.makersacademy.acebook.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.annotation.Generated;
 import javax.persistence.CascadeType;
@@ -47,8 +48,8 @@ public class Friends {
     return created_date;
   }
 
-  public void setCreatedDate(Date createdDate) {
-    this.created_date = createdDate;
+  public void setCreatedDate(LocalDate localDate) {
+    this.created_date = Date.valueOf(localDate.now());
 }
 
 public User getFirstUser() {
