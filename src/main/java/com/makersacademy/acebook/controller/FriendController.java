@@ -8,6 +8,7 @@ import com.makersacademy.acebook.repository.AuthoritiesRepository;
 import com.makersacademy.acebook.repository.FriendRepository;
 import com.makersacademy.acebook.repository.UserRepository;
 
+import java.net.http.HttpClient.Redirect;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -37,18 +38,19 @@ public class FriendController {
   @Autowired
   UserRepository userRepository;
   
-  @GetMapping("/addFriend")
-  public ResponseEntity<?> addUser(@RequestParam("friendId")String friendId) throws NullPointerException{
-  
+  @PostMapping("/addFriend")
+  public RedirectView addUser(@RequestParam("friendId")String friendId) throws NullPointerException{
+    
     Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
     String currentUserID = loggedIn.getName();
+    
     User user = userRepository.findByUsername(currentUserID);
     User user2 = userRepository.findByUsername(friendId);
     saveFriend(user, user2);
-    return ResponseEntity.ok("Friend added successfully");
+    return new RedirectView("/posts");
   }
 
-
+ 
   @GetMapping("/listFriends")
   public ResponseEntity<List<Friends>> getFriends() {
       Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
@@ -58,8 +60,7 @@ public class FriendController {
       return new ResponseEntity<List<Friends>>(myFriends, HttpStatus.OK);
   }
 
-  public void saveFriend(User name, User friend2) throws NullPointerException{
-
+  public void saveFriend(User name, User friend2) {
     Friends friend = new Friends();
     User firstuser = name;
     User seconduser = friend2;
@@ -71,6 +72,8 @@ public class FriendController {
         friend.setCreatedDate(LocalDate.now());
         friend.setFirstUser(firstuser);
         friend.setSecondUser(seconduser);
+        System.out.println(firstuser);
+        System.out.println(seconduser);
         friendRepository.save(friend);
     }
 }

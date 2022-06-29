@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "friends")
 public class Friends {
@@ -36,7 +39,7 @@ public class Friends {
   public Friends() {
   }
 
-  public Integer getId(){
+  public long getId(){
     return id;
   }
 
