@@ -18,6 +18,7 @@ public class User {
     private String username;
     private String password;
     private boolean enabled;
+    private String photo;
 
     public User() {
         this.enabled = TRUE;
@@ -39,4 +40,12 @@ public class User {
     public String getPassword() { return this.password; }
     public void setUsername(String username) { this.username = username; }
     public void setPassword(String password) { this.password = password; }
+    public void setPhotoSrc(String photo){ this.photo = photo;}
+    public Long getID(){ return this.id;}
+    @Transient
+    public String getPhotosImagePath() {
+        if (photo == null || id == null) return null;
+      return "image/" + id + "/" + photo;
+
+    }
 }

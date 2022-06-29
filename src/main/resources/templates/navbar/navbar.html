@@ -7,6 +7,6 @@
       <!-- <li sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/users/new}">Signup!</a></li> -->
       <li sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/logout}" method="post">Logout</a></li>
       <li sec:authorize="isAnonymous()"><a class="nav-link" th:href=@{/login} method="get">Login</a></li>
-      <a sec:authorize="isAuthenticated()"></a> Signed in as: <a sec:authentication="name"></a></li>
+      <a sec:authorize="isAuthenticated()"></a> Signed in as:<label for="uname"> <a id="uname" sec:authentication="name"></a></label></li>
     </ul>
   </nav>

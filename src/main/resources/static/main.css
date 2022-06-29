@@ -86,3 +86,12 @@ ul {
   .active {
     background-color: #04AA6D;
   }
+
+  #result{
+    display: flex;
+    padding: 10px 0;
+  }
+
+  .thumbnail{
+    height: 192px;
+  }
