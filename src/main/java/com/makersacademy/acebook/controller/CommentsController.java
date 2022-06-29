@@ -15,7 +15,15 @@ public class CommentsController {
 
     @PostMapping("/comments")
     public RedirectView create(@ModelAttribute Comment comment) {
+        System.out.println("###########");
+        System.out.println(comment.getUsername());
+        System.out.println(comment.getPostId());
+        System.out.println(comment.getCommentContent());
+        System.out.println("###########");
         repository.save(comment);
+        System.out.println("-----------");
+        System.out.println(comment);
+        System.out.println("-----------");
         return new RedirectView("/posts");
     }
 

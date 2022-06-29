@@ -20,19 +20,19 @@ public class Comment {
 
     private Long post_id;
 
-    private String CommentContent;
+    private String comment_content;
 
     public Comment() {}
 
     public Comment(String username, Long post_id, String CommentContent) {
         this.username = username;
         this.post_id = post_id;
-        this.CommentContent = CommentContent;
+        this.comment_content = CommentContent;
     }
 
     public String getUsername() { return this.username; }
 
     public Long getPostId() { return this.post_id; }
 
-    public String getCommentContent() { return this.CommentContent; }
+    public String getCommentContent() { return this.comment_content; }
 }
