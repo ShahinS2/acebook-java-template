@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import com.makersacademy.acebook.repository.FriendRepository;
 import lombok.Data;
 
 @Data
@@ -23,7 +23,7 @@ public class Friends {
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private long id;
 
   @Column(name = "created_date")
   private Date created_date;
@@ -43,7 +43,7 @@ public class Friends {
     return id;
   }
 
-  public void setId(Integer id){
+  public void setId(long id){
     this.id = id;
   }
 

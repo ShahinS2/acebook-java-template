@@ -64,7 +64,10 @@ public class FriendController {
     Friends friend = new Friends();
     User firstuser = name;
     User seconduser = friend2;
+    Long userID = name.getID();
     if(name.getID() > friend2.getID()){
+        System.out.println(friend2.getID());
+        System.out.println(name.getID());
          firstuser = friend2;
          seconduser = name;
     }
@@ -72,8 +75,7 @@ public class FriendController {
         friend.setCreatedDate(LocalDate.now());
         friend.setFirstUser(firstuser);
         friend.setSecondUser(seconduser);
-        System.out.println(firstuser);
-        System.out.println(seconduser);
+        friend.setId(userID);
         friendRepository.save(friend);
     }
 }
