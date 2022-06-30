@@ -10,7 +10,8 @@
 <nav>
   <ul>
     <li> <a th:href="@{/posts}" method="get" id="fb"> <i class="fab fa-facebook-f    "></i> </a> </li>
-    <li> <button id="search_btn" class="tooltip" data-tooltip="Search" type="text" th:value="${search}">
+    <!-- <li> <button id="search_btn" class="tooltip" data-tooltip="Search" type="text" th:value="${search}"> -->
+    <li> <a th:href="@{/logout}" method="post" id="logout">Logout </a></li>
         <i class="fab fa-search    "></i></p></button> </li>
 
     <li id="space2"></li>
