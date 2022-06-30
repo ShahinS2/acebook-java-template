@@ -1,7 +1,10 @@
 package com.makersacademy.acebook.controller;
 
 import com.makersacademy.acebook.model.Post;
+import com.makersacademy.acebook.model.Like;
+import com.makersacademy.acebook.model.User;
 import com.makersacademy.acebook.repository.PostRepository;
+import com.makersacademy.acebook.repository.LikeRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,17 +22,25 @@ public class PostsController {
 
     @Autowired
     PostRepository repository;
+
+    @Autowired
+    LikeRepository likesRepository;
+
     Date tmpDate = null;
+
     String keyword = "";
 
     @GetMapping("/posts")
     public String index(Model model) {
+        Iterable<Like> likes = likesRepository.findAll();
         Iterable<Post> posts;
         if(tmpDate == null && keyword.isEmpty()) posts = repository.findAll();
         else if(tmpDate == null && !keyword.isEmpty()) posts = repository.findByContentContaining(keyword);
         else if (tmpDate != null && keyword.isEmpty()) posts = repository.findByCreatedDate(tmpDate);
         else posts = repository.findByContentContainingAndCreatedDate(keyword, tmpDate); // new method necessary to filter based on content and date
+
         model.addAttribute("posts", posts);
+        model.addAttribute("likes", likes);
         model.addAttribute("post", new Post());
         tmpDate = null;
         return "posts/index";
@@ -39,7 +50,7 @@ public class PostsController {
     @PostMapping("/posts")
     public RedirectView create(@ModelAttribute Post post,@RequestParam("search") String search, @RequestParam @DateTimeFormat(pattern="MM/dd/yyyy") String date){
         Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
-        post.setUsername(loggedIn.getName());
+        post.setUsername(loggedIn.getName());  
         if(!post.getContent().isEmpty()) repository.save(post);
         keyword = search;
         SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");  
