@@ -33,6 +33,7 @@
         at: <div th:text="${#dates.format(post.createdDate, 'dd-MMM-yyyy')}" ></div>
         </div>  -->
 
+
     <ul th:each="post: ${posts}">
         <li th:text="${post.content}" />
         <ul th:each="like: ${likes}">
@@ -104,7 +105,11 @@
             <div class="container">
             <div class="container-lg p-3 mb-3 bg-light text-dark">
             <div th:text="${post.content}" ></div>
-                Posted By: <div th:text="${post.username}" ></div>
+            <form th:action="@{/addFriend}" method="post">
+                Posted By: <button type="submit"><div th:text="${post.username}" ></button></div>
+                <input type="hidden" name="friendId" th:value="${post.username}"/>
+            </form>
+
                    at: <div th:text="${#dates.format(post.createdDate, 'dd-MMM-yyyy')}" ></div>
                    <div class="post_options">
                         <div class="post_option">
