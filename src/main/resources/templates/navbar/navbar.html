@@ -17,7 +17,7 @@
           
           <li sec:authorize="isAuthenticated()"><a class="tooltip active" th:href="@{/logout}" method="post" data-tooltip="Home" href="#" id="home"> 
             <i class="fas fa-home"></i></a> </li>
-          <li sec:authorize="isAuthenticated()"> <a class="tooltip" th:href="@{/logout}" method="post" data-tooltip="Group" href="#" id="group"> 
+          <li sec:authorize="isAuthenticated()"> <a class="tooltip" th:href="@{/users/listUsers}" method="get" data-tooltip="Group" href="#" id="group"> 
             <i class="fas fa-user-friends    "></i> </a></li>
           <li sec:authorize="isAuthenticated()"> <a class="tooltip" th:href="@{/logout}" method="post" data-tooltip="Watch" href="#" id="tv">
              <i class="fas fa-tv    "></i> </a> </li>

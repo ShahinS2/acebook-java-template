@@ -1,0 +1,14 @@
+<html>
+  <li>
+    <ul class="users" th:each="users: ${users}">
+        <div class="container-lg p-3 mb-3 bg-light text-dark">
+          <div th:text="${users}" ></div>
+              <form th:action="@{/addFriend}" method="post">
+                Add friend: <button type="submit"><div th:text="${post.username}" ></button></div>
+                <input type="hidden" name="friendId" th:value="${post.username}"/>
+              </form>  
+            </div>
+        </div>
+      </ul>
+  </li>
+</html>
