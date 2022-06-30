@@ -21,6 +21,7 @@ public class User {
     private String username;
     private String password;
     private boolean enabled;
+    private String photo;
 
     private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -45,5 +46,14 @@ public class User {
     public String getUsername() { return this.username; }
     public String getPassword() { return this.password; }
     public void setUsername(String username) { this.username = username; }
+    public void setPhotoSrc(String photo){ this.photo = photo;}
+    public Long getID(){ return this.id;}
+    @Transient
+    public String getPhotosImagePath() {
+        if (photo == null || id == null) return null;
+      return "image/" + id + "/" + photo;
+
+    }
     public void setPassword(String password) { this.password = passwordEncoder().encode(password);; }
+
 }

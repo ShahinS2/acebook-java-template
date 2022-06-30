@@ -50,7 +50,7 @@ public class PostsController {
     @PostMapping("/posts")
     public RedirectView create(@ModelAttribute Post post,@RequestParam("search") String search, @RequestParam @DateTimeFormat(pattern="MM/dd/yyyy") String date){
         Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
-        post.setUsername(loggedIn.getName());
+        post.setUsername(loggedIn.getName());  
         if(!post.getContent().isEmpty()) repository.save(post);
         keyword = search;
         SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");  
