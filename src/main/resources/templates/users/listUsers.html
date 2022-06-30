@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+  <li class="User" th:each="User: ${users}">
+      <div class="form-content">
+          <div th:text="${user}" ></div>
+              <form th:action="@{/addFriend}" method="post">
+                Add friend: <button type="submit"><div th:text="${user.user}" ></button></div>
+                <input type="hidden" name="friendId" th:value="${post.username}"/>
+              </form>  
+            </div>
+        </div>
+  </li>
+</html>
