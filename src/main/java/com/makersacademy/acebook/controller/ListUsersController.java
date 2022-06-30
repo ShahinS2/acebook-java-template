@@ -26,7 +26,8 @@ public class ListUsersController {
     Iterable<User> users;
     Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
     User user = userRepository.findByUsername(loggedIn.getName());
+    // List<User> lsUsers = UserRepository.User(user);
     model.addAttribute("user", user);
     return "/users/listUsers";
-  }
+  }  
 }

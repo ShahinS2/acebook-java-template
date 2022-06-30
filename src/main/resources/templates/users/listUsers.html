@@ -1,6 +1,7 @@
 <!DOCTYPE html>
+<body>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-  <li class="User" th:each="User: ${users}">
+  <li class="user-list" th:each="User: ${users}">
       <div class="form-content">
           <div th:text="${user}" ></div>
               <form th:action="@{/addFriend}" method="post">
@@ -10,4 +11,5 @@
             </div>
         </div>
   </li>
+</body>
 </html>
