@@ -4,6 +4,7 @@ import com.makersacademy.acebook.model.Post;
 import com.makersacademy.acebook.model.Like;
 import com.makersacademy.acebook.model.User;
 import com.makersacademy.acebook.repository.PostRepository;
+import com.makersacademy.acebook.repository.UserRepository;
 import com.makersacademy.acebook.repository.LikeRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +27,9 @@ public class PostsController {
     @Autowired
     LikeRepository likesRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     Date tmpDate = null;
 
     String keyword = "";
@@ -38,7 +42,9 @@ public class PostsController {
         else if(tmpDate == null && !keyword.isEmpty()) posts = repository.findByContentContaining(keyword);
         else if (tmpDate != null && keyword.isEmpty()) posts = repository.findByCreatedDate(tmpDate);
         else posts = repository.findByContentContainingAndCreatedDate(keyword, tmpDate); // new method necessary to filter based on content and date
-
+        Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(loggedIn.getName());
+        model.addAttribute("user",user);
         model.addAttribute("posts", posts);
         model.addAttribute("likes", likes);
         model.addAttribute("post", new Post());

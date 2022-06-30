@@ -46,9 +46,9 @@ public class User {
         this.enabled = enabled;
     }
 
-    public Long getID(){
+  /*   public Long getID(){
         return id;
-    }
+    }*/
 
     // public List<User> getFriends(){
 

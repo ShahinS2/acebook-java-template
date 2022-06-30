@@ -222,7 +222,7 @@ main_body {
 
   /* img of the post lists */
   .post_image img {
-    width:90%;
+    width:20%;
   }
 
   /* likes/comments/share icons */
@@ -234,12 +234,12 @@ main_body {
   }
 
   /* the text inside the container of the post-list: Posted by, time etc */
-  .container {
-    font-size: medium;
+ /* .container {
+    font-size: small;
     color: rgb(27, 25, 26);
     display: flex;
     flex-flow: row;
-  }
+  }*/
  
 
   /* }the continer with the likes/comments icons */
@@ -274,7 +274,7 @@ main_body {
     display: flex;
     justify-content: center;
     /* flex-flow: row wrap; */
-    width: 100%;
+    width: 50%;
   }
 /* centered content aligning css  */
   .main_body {
@@ -339,4 +339,6 @@ main_body {
   .thumbnail{
     height: 192px;
   }
+
+  
 

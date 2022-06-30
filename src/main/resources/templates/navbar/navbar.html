@@ -9,18 +9,18 @@
 
 <nav>
   <ul>
-    <li> <a href="#" id="fb"> <i class="fab fa-facebook-f    "></i> </a> </li>
+    <li> <a th:href="@{/posts}" method="get" id="fb"> <i class="fab fa-facebook-f    "></i> </a> </li>
     <li> <button id="search_btn" class="tooltip" data-tooltip="Search" type="text" th:value="${search}">
         <i class="fab fa-search    "></i></p></button> </li>
 
     <li id="space2"></li>
 
           
-          <li sec:authorize="isAuthenticated()"><a class="tooltip active" th:href="@{/logout}" method="post" data-tooltip="Home" href="#" id="home"> 
+          <li sec:authorize="isAuthenticated()"><a class="toolti  p active" th:href="@{/posts}" method="get" data-tooltip="Home" href="#" id="home"> 
             <i class="fas fa-home"></i></a> </li>
           <li sec:authorize="isAuthenticated()"> <a class="tooltip" th:href="@{/logout}" method="post" data-tooltip="Group" href="#" id="group"> 
             <i class="fas fa-user-friends    "></i> </a></li>
-          <li sec:authorize="isAuthenticated()"> <a class="tooltip" th:href="@{/logout}" method="post" data-tooltip="Watch" href="#" id="tv">
+          <li sec:authorize="isAuthenticated()"> <a class="tooltip"  data-tooltip="Watch" href="https://www.youtube.com" id="tv">
              <i class="fas fa-tv    "></i> </a> </li>
           <li sec:authorize="isAuthenticated()"> <a class="tooltip" th:href="@{/listFriends}" method="get" data-tooltip="Friend" href="#" id="friend"> 
             <i class="fas fa-user-alt    "></i> </a> </li>
@@ -31,40 +31,10 @@
             <i class="fab fa-facebook-messenger    "></i></button></li>
           <li sec:authorize="isAuthenticated()"> <button class="tooltip" th:href="@{/logout}" method="post" data-tooltip="Notification" id="btn_bell"> 
             <i class="fas fa-bell    "></i></button></li>
-          <li sec:authorize="isAuthenticated()">  <button class="tooltip" th:href="@{/logout}" method="post" data-tooltip="Profile" id="btn_profile">
-            <i class="fas fa-user-cog    "></i></button>  </li>
+          <li sec:authorize="isAuthenticated()">  <a class="tooltip" th:href="@{/profile}" method="get" href="#" data-tooltip="Profile" id="btn_profile">
+            <i class="fas fa-user-cog    "></i></a>  </li>
       </ul>
   </nav>
-</header>
-
-
-    <li sec:authorize="isAuthenticated()"><a class="tooltip active" th:href="@{/logout}" method="post"
-        data-tooltip="Home" href="#" id="home">
-        <i class="fas fa-home"></i></a> </li>
-    <li sec:authorize="isAuthenticated()"> <a class="tooltip" th:href="@{/logout}" method="post" data-tooltip="Group"
-        href="#" id="group">
-        <i class="fas fa-user-friends    "></i> </a></li>
-    <li sec:authorize="isAuthenticated()"> <a class="tooltip" th:href="@{/logout}" method="post" data-tooltip="Watch"
-        href="#" id="tv">
-        <i class="fas fa-tv    "></i> </a> </li>
-    <li sec:authorize="isAuthenticated()"> <a class="tooltip" th:href="@{/logout}" method="post" data-tooltip="Friend"
-        href="#" id="friend">
-        <i class="fas fa-user-alt    "></i> </a> </li>
-    <li id="space1"></li>
-    <li sec:authorize="isAuthenticated()"> <button class="tooltip" th:href="@{/logout}" method="post" data-tooltip="Add"
-        id="btn_plus">
-        <i class="fas fa-plus    "></i></button> </li>
-    <li sec:authorize="isAuthenticated()"> <button class="tooltip" th:href="@{/logout}" method="post"
-        data-tooltip="Message" id="btn_msg">
-        <i class="fab fa-facebook-messenger    "></i></button></li>
-    <li sec:authorize="isAuthenticated()"> <button class="tooltip" th:href="@{/logout}" method="post"
-        data-tooltip="Notification" id="btn_bell">
-        <i class="fas fa-bell    "></i></button></li>
-    <li sec:authorize="isAuthenticated()"> <button class="tooltip" th:href="@{/logout}" method="post"
-        data-tooltip="Profile" id="btn_profile">
-        <i class="fas fa-user-cog    "></i></button> </li>
-  </ul>
-</nav>
 </header>
 
 
