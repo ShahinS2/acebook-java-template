@@ -330,4 +330,13 @@ main_body {
     background-color: #1d4234;
   }
 
-  */
+
+  #result{
+    display: flex;
+    padding: 10px 0;
+  }
+
+  .thumbnail{
+    height: 192px;
+  }
+

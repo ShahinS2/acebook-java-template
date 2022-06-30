@@ -18,6 +18,7 @@
          </u>
 
 
+
     <ul th:each="post: ${posts}">
         <li th:text="${post.content}" />
         <ul th:each="like: ${likes}">
@@ -71,6 +72,7 @@
         </div>
     
     <!-- list of posts from users plus image -->
+
         <div class="main-content">
                 <form action="#" th:action="@{/posts}" th:object="${post}" method="post">
                         <li> <a class="tooltip active" data-tooltip="Home" href="#" id="home"> <i class="fa-solid fa-house"></i> </a>
@@ -103,6 +105,7 @@
                                     <button><input type="submit" value="Like" /></button>
                                 </form>
                             </div>
+
 
                             <div class="post_option">
                                 <span class="material-icons"> chat_bubble_outline </span>
