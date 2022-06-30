@@ -46,6 +46,9 @@ public class User {
         this.enabled = enabled;
     }
 
+    public User(String username){
+        this.username = username;
+    }
   /*   public Long getID(){
         return id;
     }*/
