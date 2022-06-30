@@ -26,7 +26,7 @@ public class ProfilePageController {
     @GetMapping("/profile")
     public String profile(Model model){
         Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByusername(loggedIn.getName());
+        User user = userRepository.findByUsername(loggedIn.getName());
         model.addAttribute("user",user);
         return "profile/profile";
     }
@@ -35,7 +35,7 @@ public class ProfilePageController {
     public RedirectView saveUser(@ModelAttribute User user, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        user = userRepository.findByusername(loggedIn.getName());
+        user = userRepository.findByUsername(loggedIn.getName());
         user.setPhotoSrc(fileName);
         userRepository.save(user);  
         String uploadDir = "src/main/resources/static/image/" + user.getID(); 

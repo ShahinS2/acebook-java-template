@@ -19,7 +19,7 @@
 
 
 
-    <ul th:each="post: ${posts}">
+<!--   <ul th:each="post: ${posts}">
         <li th:text="${post.content}" />
         <ul th:each="like: ${likes}">
             li th:if="${like.post_id == post.id}">You Liked This!</li>
@@ -29,19 +29,14 @@
             <input type="hidden" name="username" th:value="${#authentication.name}">
             <input type="submit" value="Like" />
         </form>
-    </ul>
+    </ul>-->
 
     <!-- </ul> -->
 
  <div class="main_body">
         <div class="sidebar">
             <div class="sidebarRow">
-                Here should be the username<div th:text="${post.username}"></div>
-            </div>
-
-            <div class="sidebarRow">
-                <span class="material-icons"> local_hospital</span>
-                <h4>hospital info</h4>
+                User: <div sec:authentication="name"></div>
             </div>
 
             <div class="sidebarRow">
@@ -55,18 +50,13 @@
             </div>
 
             <div class="sidebarRow">
-                <span class="material-icons"> storefront </span>
+                <a href="https://www.amazon.com"><span class="material-icons"> storefront </span></a>
                 <h4>marketplace</h4>
             </div>
 
             <div class="sidebarRow">
-                <span class="material-icons"> video_library</span>
+                <a href="https://www.youtube.com"> <span class="material-icons"> video_library</span></a>
                 <h4>videos</h4>
-            </div>
-
-            <div class="sidebarRow">
-                <span class="material-icons"> expand </span>
-                <h4>More</h4>
             </div>
             <!-- finished sidebar -->
         </div>
@@ -111,8 +101,8 @@
 =======
         <div class="main-content">
                 <form action="#" th:action="@{/posts}" th:object="${post}" method="post">
-                        <li> <a class="tooltip active" data-tooltip="Home" href="#" id="home"> <i class="fa-solid fa-house"></i> </a>
-                        </li>
+                         <a class="tooltip active" data-tooltip="Home" href="#" id="home"> <i class="fa-solid fa-house"></i> </a>
+                        
                          <div class="form-content">
                         <p>Content: <input type="text" th:field="*{content}" /></p>
                         <p>Search: <input type="text" name="search" th:value="${search}" /></p>
@@ -124,12 +114,12 @@
             <ul>
             <li class="post-list" th:each="post: ${posts}">
                      <div class="post_image">
-                     <img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Beautiful_swan.jpg" alt="swan" />
+                     <img  th:src="@{${user.photosImagePath}}" alt="No Profile Pic uploaded" />
                         <div class="container">
                             <!-- <div class="container-lg p-3 mb-3 bg-light text-dark"> -->
-                            <div th:text="${post.content}"></div> 
-                            <ol>Posted By: <div th:text="${post.username}"></div></ol> 
-                            <ol> at:<div th:text="${#dates.format(post.createdDate, 'dd-MMM-yyyy')}"></div></ol> 
+                            <h4><div th:text="${post.content}"></div></h4> 
+                            <ol><h6>Posted by:<div th:text="${post.username}"></div></h6></ol>
+                            <ol><h6>at:<div th:text="${#dates.format(post.createdDate, 'dd-MMM-yyyy')}"></div></h6></ol> 
                          
                         <div class="post_options">
                              <div class="post_option">
