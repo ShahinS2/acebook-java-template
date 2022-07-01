@@ -24,10 +24,10 @@ public class Comment {
 
     public Comment() {}
 
-    public Comment(String username, Long post_id, String CommentContent) {
+    public Comment(String username, Long post_id, String comment_content) {
         this.username = username;
         this.post_id = post_id;
-        this.comment_content = CommentContent;
+        this.comment_content = comment_content;
     }
 
     public String getUsername() { return this.username; }
