@@ -5,6 +5,7 @@ import com.makersacademy.acebook.model.Like;
 import com.makersacademy.acebook.model.User;
 import com.makersacademy.acebook.model.Comment;
 import com.makersacademy.acebook.repository.PostRepository;
+import com.makersacademy.acebook.repository.UserRepository;
 import com.makersacademy.acebook.repository.LikeRepository;
 import com.makersacademy.acebook.repository.CommentRepository;
 import java.text.ParseException;
@@ -30,6 +31,10 @@ public class PostsController {
 
     @Autowired
     CommentRepository commentsRepository;
+    
+    @Autowired
+    UserRepository userRepository;
+
 
     Date tmpDate = null;
 
@@ -44,7 +49,9 @@ public class PostsController {
         else if(tmpDate == null && !keyword.isEmpty()) posts = repository.findByContentContaining(keyword);
         else if (tmpDate != null && keyword.isEmpty()) posts = repository.findByCreatedDate(tmpDate);
         else posts = repository.findByContentContainingAndCreatedDate(keyword, tmpDate); // new method necessary to filter based on content and date
-
+        Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(loggedIn.getName());
+        model.addAttribute("user",user);
         model.addAttribute("posts", posts);
         model.addAttribute("likes", likes);
         model.addAttribute("post", new Post());
@@ -58,7 +65,7 @@ public class PostsController {
     @PostMapping("/posts")
     public RedirectView create(@ModelAttribute Post post,@RequestParam("search") String search, @RequestParam @DateTimeFormat(pattern="MM/dd/yyyy") String date){
         Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
-        post.setUsername(loggedIn.getName());
+        post.setUsername(loggedIn.getName());  
         if(!post.getContent().isEmpty()) repository.save(post);
         keyword = search;
         SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");  

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Acebook Profile Page</title>
+    <link rel="stylesheet" href="/main.css" />
+    <script src="https://kit.fontawesome.com/1afd8264a8.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+</html>
+<body>
+    <div th:replace="navbar/navbar :: nav"></div>
+    <form th:action="@{/profile/save}" th:object="${user}" method="post" enctype="multipart/form-data">
+    
+     <div>
+        <label>Photos: </label>
+        <input type="file" name="image" accept="image/png, image/jpeg" />
+        <p><input type="submit" value="Submit" /></p>
+    </div>
+    </form>
+    <form th:object="${user}">
+        <img class ="thumbnail" th:src="@{${user.photosImagePath}}" />
+        <p>Username: <input type="hidden" th:text="${user.username}"/></p>
+    </form>
+</body>
