@@ -9,14 +9,13 @@
 
 <nav>
   <ul>
-    <li> <a th:href="@{/posts}" method="get" id="fb"> <i class="fab fa-facebook-f    "></i> </a> </li>
+
+    <li> <a th:href="@{/posts}" method="get" id="fb"> <i class="fa-solid fa-a"></i></a> </li>
     <li> <a th:href="@{/logout}" method="post" id="logout">Logout </a></li>
-    <li> <a th:href="@{/users/new}" method="post" id="signup">Sign up </a></li>
-    <i class="fab fa-search    "></i></p></button> </li>
+    <li> <a th:href="@{/users/new}" method="post" id="signup">Sign Up </a></li>
+    <li class="fab fa-search    "></i></p></button> </li>
 
     <li id="space2"></li>
-
-          
           <li sec:authorize="isAuthenticated()"><a class="toolti  p active" th:href="@{/posts}" method="get" data-tooltip="Home" href="#" id="home"> 
             <i class="fas fa-home"></i></a> </li>
           <li sec:authorize="isAuthenticated()"> <a class="tooltip" th:href="@{/listUsers}" method="get" data-tooltip="Group" href="#" id="group"> 
