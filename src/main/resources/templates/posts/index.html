@@ -10,13 +10,13 @@
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"> -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-
 <body>
+
     <div th:replace="navbar/navbar :: nav"></div>
         <u>
             <h1>Acebook Posts</h1>
          </u>
-         <!--the three divs of the main content: sidebar-->     
+
 
 
 <!--   <ul th:each="post: ${posts}">
@@ -29,31 +29,14 @@
             <input type="hidden" name="username" th:value="${#authentication.name}">
             <input type="submit" value="Like" />
         </form>
-
-
-        <ul th:each="comment: ${comments}">
-            <div th:if="${comment.post_id == post.id}">
-                <div th:text="${comment.comment_content}" />
-            </div>
-        </ul>
-        <form action="#" th:action="@{/comments}"  th:object="${comment}" method="post">
-            <p>Comment: <input type="text" name="comment_content" th:field="*{comment_content}" /></p>
-            <input type="hidden" name="post_id" th:value="${post.id}">
-            <input type="hidden" name="username" th:value="${#authentication.name}">
-            <p><input type="submit" value="Comment" /></p>
-        </form>
-    </ul>
-       
-    <div class="main_body">    <!-- </ul> -->
     </ul>-->
-
 
     <!-- </ul> -->
 
  <div class="main_body">
         <div class="sidebar">
             <div class="sidebarRow">
-                User:&nbsp; <div sec:authentication="name"></div>
+                User: <div sec:authentication="name"></div>
             </div>
 
             <div class="sidebarRow">
@@ -75,65 +58,71 @@
                 <a href="https://www.youtube.com"> <span class="material-icons"> video_library</span></a>
                 <h4>videos</h4>
             </div>
-
+            <!-- finished sidebar -->
+        </div>
+    
+    <!-- list of posts from users plus image -->
 
         <div class="main-content">
                 <form action="#" th:action="@{/posts}" th:object="${post}" method="post">
                          <a class="tooltip active" data-tooltip="Home" href="#" id="home"> <i class="fa-solid fa-house"></i> </a>
-                        
-                         <div class="form-content">
+                        <div class="form-content">
                         <p>Content: <input type="text" th:field="*{content}" /></p>
                         <p>Search: <input type="text" name="search" th:value="${search}" /></p>
                         <p>Date: <input type="date" name="date" id="date" th:value="${date}" /></p>
-                        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-                          
-                        <div class="form-content">
-                            <div class="post-input-container">
-                                <textarea rows="5" placeholder="What's on your mind, Makers?"></textarea>
-                            </div>
-                        </div> 
-                    </form>
-                </div>
-            </div>
-
-    </div>
-                                     <!-- where the posts are starting: -->
-                <div class="post_image">
-
-
-                    <div class="posts" th:each="post: ${posts}">
-                            <img  th:src="@{${user.photosImagePath}}" alt="No Profile Pic uploaded" />
-                        <li class="text-posts">
-                            <div th:text="${post.content}"></div></h4> 
-                            Posted by:<div th:text="${post.username}"></div>
-                            at:<div th:text="${#dates.format(post.createdDate, 'dd-MMM-yyyy')}">
+                        <p><input type="submit" value="Submit" /></p>
+                    </div>  
+                 </form>
+           
+            <ul>
+            <li class="post-list" th:each="post: ${posts}">
+                     <div class="post_image">
+                        <div class="container">
+                            <!-- <div class="container-lg p-3 mb-3 bg-light text-dark"> -->
+                            <h4><div th:text="${post.content}"></div></h4> 
+                            <ol><h6>Posted by:<div th:text="${post.username}"></div></h6></ol>
+                            <ol><h6>at:<div th:text="${#dates.format(post.createdDate, 'dd-MMM-yyyy')}"></div></h6></ol> </div>
                          
-
-                        </li>
-                    </div>
-                            <div class="post_option"> 
-                              
-                                <span class="material-icons"> </span> 
-
-                          
-                                <!-- <form action="#" th:action="@{/likes}" method="post">
-                                    <input type="button" value="thumbs-up">  
+                        <div class="post_options">
+                             <div class="post_option">
+                                
+                                <ul th:each="like: ${likes}">
+                                    <li th:if="${like.post_id == post.id}">You Liked This!</li>
+                                </ul>
+                                <form action="#" th:action="@{/likes}" method="post">
                                     <input type="hidden" name="post_id" th:value="${post.id}">
                                     <input type="hidden" name="username" th:value="${#authentication.name}">
-                                    <button><input type="submit" value="Like" /></button>
+                                    <input type="submit" value="Like" />
                                 </form>
-                           -->
-                            </div>  
-                        </div>
-                        <div class="post_options">
-                           
-                        </div> 
-                    </div>       
-                </div>
-            </div>
-   
+                            </div>
+
+
+                            <div class="post_option">
+                                <ul th:each="comment: ${comments}">
+                                <div th:if="${comment.post_id == post.id}">
+                                    <div th:text="${comment.comment_content}">
+                                    </div>
+                                </ul>
+                                <form action="#" th:action="@{/comments}"  th:object="${comment}" method="post">
+                                    <p>Comment: <input type="text" name="comment_content" th:field="*{comment_content}" /></p>
+                                    <input type="hidden" name="post_id" th:value="${post.id}">
+                                    <input type="hidden" name="username" th:value="${#authentication.name}">
+                                    <p><input type="submit" value="Comment" /></p>
+                                </form> 
+                             </div>
+
+                             <div class="post_option">
+                                 <span class="material-icons"> near_me </span>
+                                    <p>Share</p>
+                            </div>
+                         </div>
+                    </div>      
+            </li>
+         </ul>
+     </div>
+</div>
     </body>
-</html>
+    </html>
 
 <!-- 
      <ul id="post-list" th:each="post: ${posts}">
@@ -141,17 +130,3 @@
         Posted By: <div th:text="${post.username}" ></div>
         at: <div th:text="${#dates.format(post.createdDate, 'dd-MMM-yyyy')}" ></div>
         </div>   -->
-
-        <!--   <ul th:each="post: ${posts}">
-        <li th:text="${post.content}" />
-        <ul th:each="like: ${likes}">
-            li th:if="${like.post_id == post.id}">You Liked This!</li>
-        </ul>
-        <form action="#" th:action="@{/likes}" method="post">
-            <input type="hidden" name="post_id" th:value="${post.id}">
-            <input type="hidden" name="username" th:value="${#authentication.name}">
-            <input type="submit" value="Like" />
-        </form>
-    </ul>-->
-
-    <!-- </ul> -->
