@@ -35,6 +35,7 @@ public class Post {
     public Date getCreatedDate()        { return this.createdDate; }
     public void setContent(String content) { this.content = content; }
     public String getUsername(){return this.username;}
+    public Long getId(){return this.id;}
 
     public void setUsername(String name) {
         this.username = name;
