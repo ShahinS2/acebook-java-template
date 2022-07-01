@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<head lang="en">
+  <meta charset="UTF-8" />
+  <title>Acebook</title>
+  <link rel="stylesheet" href="/main.css" />
+  <script src="https://kit.fontawesome.com/1afd8264a8.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<div th:replace="navbar/navbar :: nav"></div>
+
+<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+  <li class="user-list" th:each="user: ${users}">
+    <div class="form-content">
+        <form th:action="@{/addFriend}" method="post">
+          Add friend: <button type="submit"><div th:text="${user.username}" ></button></div>
+          <input type="hidden" name="friendId" th:value="${user.username}"/>
+        </form>  
+  </li>
+</body>
+</html>

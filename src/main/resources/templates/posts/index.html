@@ -17,8 +17,6 @@
             <h1>Acebook Posts</h1>
          </u>
 
-
-
 <!--   <ul th:each="post: ${posts}">
         <li th:text="${post.content}" />
         <ul th:each="like: ${likes}">
@@ -40,7 +38,7 @@
             </div>
 
             <div class="sidebarRow">
-                <span class="material-icons"> people </span>
+                <a th:href="@{/listUsers}" method="get"><span class="material-icons"> people </span></a>
                 <h4>people</h4>
             </div>
 
