@@ -16,9 +16,41 @@
         <u>
             <h1>Acebook Posts</h1>
          </u>
-         <!--the three divs of the main content: sidebar-->
-    <div class="main_body">
-     
+         <!--the three divs of the main content: sidebar-->     
+
+
+<!--   <ul th:each="post: ${posts}">
+        <li th:text="${post.content}" />
+        <ul th:each="like: ${likes}">
+            li th:if="${like.post_id == post.id}">You Liked This!</li>
+        </ul>
+        <form action="#" th:action="@{/likes}" method="post">
+            <input type="hidden" name="post_id" th:value="${post.id}">
+            <input type="hidden" name="username" th:value="${#authentication.name}">
+            <input type="submit" value="Like" />
+        </form>
+
+
+        <ul th:each="comment: ${comments}">
+            <div th:if="${comment.post_id == post.id}">
+                <div th:text="${comment.comment_content}" />
+            </div>
+        </ul>
+        <form action="#" th:action="@{/comments}"  th:object="${comment}" method="post">
+            <p>Comment: <input type="text" name="comment_content" th:field="*{comment_content}" /></p>
+            <input type="hidden" name="post_id" th:value="${post.id}">
+            <input type="hidden" name="username" th:value="${#authentication.name}">
+            <p><input type="submit" value="Comment" /></p>
+        </form>
+    </ul>
+       
+    <div class="main_body">    <!-- </ul> -->
+    </ul>-->
+
+
+    <!-- </ul> -->
+
+ <div class="main_body">
         <div class="sidebar">
             <div class="sidebarRow">
                 User:&nbsp; <div sec:authentication="name"></div>
@@ -43,15 +75,13 @@
                 <a href="https://www.youtube.com"> <span class="material-icons"> video_library</span></a>
                 <h4>videos</h4>
             </div>
-        </div>
-                        <!-- </div> -->
-    
-                        <!-- list of posts from users plus image -->
-    
-            <div class="main-content">
-                <div class="search-form">
-                    <form action="#" th:action="@{/posts}" th:object="${post}" method="post">
-                        <a class="tooltip active" data-tooltip="Home" href="#" id="home"> <i class="fa-solid fa-house"></i> </a>
+
+
+        <div class="main-content">
+                <form action="#" th:action="@{/posts}" th:object="${post}" method="post">
+                         <a class="tooltip active" data-tooltip="Home" href="#" id="home"> <i class="fa-solid fa-house"></i> </a>
+                        
+                         <div class="form-content">
                         <p>Content: <input type="text" th:field="*{content}" /></p>
                         <p>Search: <input type="text" name="search" th:value="${search}" /></p>
                         <p>Date: <input type="date" name="date" id="date" th:value="${date}" /></p>
